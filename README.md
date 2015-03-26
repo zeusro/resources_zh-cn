@@ -4,6 +4,34 @@
 ##android studio 版本
 window版 1.1.0 
 
+##todo
+ApplicationBundle.properties
+
+CodeInsightBundle.properties
+
+CommonBundle.properties
+
+DebuggerBundle.properties
+
+ExecutionBundle.properties
+
+IdeBundle.properties
+
+InspectionsBundle.properties
+
+OptionsBundle.properties
+
+RefactoringBundle.properties
+
+VcsBundle.properties
+
+XmlBundle.properties
+
+文件分析的改进
+
+以汉化列表的持久化
+
+
 ## 使用
 
 1进入这个目录，这个目录是我汉化好的
