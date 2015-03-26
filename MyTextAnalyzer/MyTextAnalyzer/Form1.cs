@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -30,6 +31,8 @@ namespace MyTextAnalyzer
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
             Action action = new Action(() =>
             {
                 Clear();
@@ -38,13 +41,15 @@ namespace MyTextAnalyzer
                 var files = Directory.GetFiles(Pathnew, "*.properties", SearchOption.TopDirectoryOnly).ToList();//目标目录
                 //var oldfiles = Directory.GetFiles(Pathold, "*.properties", SearchOption.TopDirectoryOnly).ToList();//目标目录
                 //for (int i = 0; i < files.Count; i++)
-                for (int i = 0; i < 1; i++)
+                //for (int i = 0; i < 1; i++)
+                for (int i = 0; i < files.Count; i++)
                 {
                     //遍历文件，然后从旧的文件找出可以汉化的部分，然后替换掉=号后面的内容
                     string propertiePath = files.ElementAt(i);//propertie全路径
                     string fileName = propertiePath.Split('\\').Last();
                     Result.AppendText(string.Format("开始分析文件：{1}{0}", Environment.NewLine, propertiePath));
-                    StringBuilder sb = new StringBuilder();
+                    StringBuilder sb = new StringBuilder();//记录汉化文
+                    StringBuilder sb2 = new StringBuilder();//记录原文
                     using (StreamReader sr = new StreamReader(propertiePath, Encoding.ASCII))
                     {
                         int line = 0;
@@ -60,15 +65,21 @@ namespace MyTextAnalyzer
                             using (StreamReader sr2 = new StreamReader(Path.Combine(Pathold, fileName), Encoding.ASCII))
                             //读取已汉化文件
                             {
-                                //todo：要建立一个二维数组，求并集。然后把待汉化的放末尾
+                                //打开新文件，然后遍历旧文件的每一行，然后替换，追加到sb,最后把sb输出到新目录里面
                                 List<string> oldTextList = new List<string>();
                                 while (!sr2.EndOfStream)
                                 {
                                     oldTextList.Add(sr2.ReadLine());
                                 }
                                 string newhead = a.Split('=').First();//原文头部
-                                if (oldTextList.Where(o => o.StartsWith(newhead)).FirstOrDefault() != null)
+                                string fine = oldTextList.Where(o => o.StartsWith(newhead)).FirstOrDefault();//汉化文
+                                if (fine != null)//有汉化文
                                 {
+                                    sb.AppendLine(fine);//汉化文
+                                }
+                                else
+                                {
+                                    sb2.AppendLine(a);//原文
                                 }
                             }
                         }
@@ -78,13 +89,19 @@ namespace MyTextAnalyzer
                         var bytes = System.Text.Encoding.ASCII.GetBytes(sb.ToString());
                         fs.Write(bytes, 0, bytes.Length);
                     }
-
+                    using (FileStream fs = new FileStream(Path.Combine(Pathtarget, fileName), FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
+                    {
+                        var bytes = System.Text.Encoding.ASCII.GetBytes(sb2.ToString());
+                        fs.Write(bytes, 0, bytes.Length);
+                    }
+                    //待汉化的字符在前
                 }
-                //todo:打开新文件，然后遍历旧文件的每一行，然后替换，追加到sb,最后把sb输出到新目录里面
-                //编码？
                 Result.AppendText(string.Format("装逼结束{0}", Environment.NewLine));
             });
             TryCatch(action);
+            sw.Stop();
+            Result.AppendText(string.Format("耗时：{0}毫秒", sw.ElapsedMilliseconds));
+            //Result.AppendText(string.Format(""));
         }
 
         private void Initialize()
