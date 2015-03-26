@@ -78,7 +78,7 @@
             this.PathTarget.Name = "PathTarget";
             this.PathTarget.Size = new System.Drawing.Size(471, 21);
             this.PathTarget.TabIndex = 0;
-            this.PathTarget.Text = "F:\\MyOpenSourceLife\\resources_zh-cn\\MyTextAnalyzer";
+            this.PathTarget.Text = "F:\\MyOpenSourceLife\\resources_zh-cn\\MyTextAnalyzer\\Result\\messages";
             // 
             // label3
             // 

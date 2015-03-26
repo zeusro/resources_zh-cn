@@ -35,26 +35,52 @@ namespace MyTextAnalyzer
                 Clear();
                 Result.AppendText(string.Format("开始装逼{0}", Environment.NewLine));
                 Initialize();
-                var files = Directory.GetFiles(Pathnew, "*.properties", SearchOption.TopDirectoryOnly).ToList();
+                var files = Directory.GetFiles(Pathnew, "*.properties", SearchOption.TopDirectoryOnly).ToList();//目标目录
+                //var oldfiles = Directory.GetFiles(Pathold, "*.properties", SearchOption.TopDirectoryOnly).ToList();//目标目录
                 //for (int i = 0; i < files.Count; i++)
                 for (int i = 0; i < 1; i++)
                 {
+                    //遍历文件，然后从旧的文件找出可以汉化的部分，然后替换掉=号后面的内容
                     string propertiePath = files.ElementAt(i);//propertie全路径
+                    string fileName = propertiePath.Split('\\').Last();
                     Result.AppendText(string.Format("开始分析文件：{1}{0}", Environment.NewLine, propertiePath));
-                    StringWriter sw = new StringWriter();
                     StringBuilder sb = new StringBuilder();
-
                     using (StreamReader sr = new StreamReader(propertiePath, Encoding.ASCII))
                     {
+                        int line = 0;
                         while (!sr.EndOfStream)
                         {
-                            string a = sr.ReadLine();
-                            //Result.AppendText(string.Format("该行为：{1}{0}", Environment.NewLine, a));
+                            string a = sr.ReadLine();//原文
+                            if (string.IsNullOrWhiteSpace(a) || !a.Contains("=") || a.StartsWith("#"))
+                            {
+                                line++;
+                                continue;
+                            }
+                            //Result.AppendText(string.Format("{2}行为：{1}{0}", Environment.NewLine, a, line++));
+                            using (StreamReader sr2 = new StreamReader(Path.Combine(Pathold, fileName), Encoding.ASCII))
+                            //读取已汉化文件
+                            {
+                                //todo：要建立一个二维数组，求并集。然后把待汉化的放末尾
+                                List<string> oldTextList = new List<string>();
+                                while (!sr2.EndOfStream)
+                                {
+                                    oldTextList.Add(sr2.ReadLine());
+                                }
+                                string newhead = a.Split('=').First();//原文头部
+                                if (oldTextList.Where(o => o.StartsWith(newhead)).FirstOrDefault() != null)
+                                {
+                                }
+                            }
                         }
+                    }
+                    using (FileStream fs = new FileStream(Path.Combine(Pathtarget, fileName), FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
+                    {
+                        var bytes = System.Text.Encoding.ASCII.GetBytes(sb.ToString());
+                        fs.Write(bytes, 0, bytes.Length);
                     }
 
                 }
-                //打开新文件，然后遍历旧文件的每一行，然后替换，追加到sb,最后把sb输出到新目录里面
+                //todo:打开新文件，然后遍历旧文件的每一行，然后替换，追加到sb,最后把sb输出到新目录里面
                 //编码？
                 Result.AppendText(string.Format("装逼结束{0}", Environment.NewLine));
             });
