@@ -21,8 +21,8 @@ window版 1.1.0
 
 `C:\Program Files\Android\Android Studio\lib`
 
-
-5听不懂是吧，把我backup文件夹里的汉化包覆盖到Android studio里就行啦
-
 ## 有没有其他版本？
 本人没有Mac,不装Linux。所以
+
+## 如何参与汉化？
+用eclipse或myeclipse打开那些操蛋文件，编辑后pull request过来就行，我会检查，然后合并
