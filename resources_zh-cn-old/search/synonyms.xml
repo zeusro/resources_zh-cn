@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<options>
+
+  <configurable id="preferences.keymap" configurable_name="Keymap">
+
+    <option name="keymap">
+      <synonym>\u6620\u5C04</synonym>
+      <synonym>\u6620\u5C04\u952E</synonym>
+      <synonym>\u521B\u5EFA\u6620\u5C04</synonym>
+      <synonym>\u521B\u5EFA\u952E\u6620\u5C04</synonym>
+      <synonym>\u65B0\u5EFA\u952E\u76D8\u6620\u5C04</synonym>
+      <synonym>\u6DFB\u52A0\u952E\u76D8\u6620\u5C04</synonym>
+      <synonym>\u7BA1\u7406\u952E\u76D8\u6620\u5C04</synonym>
+      <synonym>\u952E\u76D8\u65B9\u6848</synonym>
+      <synonym>Mac OS X\u952E\u76D8\u6620\u5C04</synonym>
+      <synonym>Emacs\u952E\u76D8\u6620\u5C04</synonym>
+      <synonym>Visual Studio\u952E\u76D8\u6620\u5C04</synonym>
+      <synonym>\u7BA1\u7406\u5FEB\u6377\u65B9\u5F0F</synonym>
+      <synonym>\u952E\u76D8\u5FEB\u6377\u952E</synonym>
+      <synonym>\u591A\u79CD\u952E\u76D8\u6620\u5C04</synonym>
+      <synonym>JBuilder\u952E\u76D8\u6620\u5C04</synonym>
+      <synonym>\u6FC0\u6D3B\u952E\u76D8\u6620\u5C04</synonym>
+      <synonym>\u66F4\u6539\u5F53\u524D\u952E\u76D8\u6620\u5C04</synonym>
+      <synonym>\u8BBE\u7F6E\u952E\u76D8\u6620\u5C04</synonym>
+      <synonym>\u6FC0\u6D3B\u952E\u76D8\u6620\u5C04</synonym>
+    </option>
+
+    <synonym>\u7BA1\u7406\u5FEB\u901F\u5217\u8868</synonym>
+    <synonym>\u65B0\u5EFA\u5FEB\u901F\u5217\u8868</synonym>
+    <synonym>\u7F16\u8F91\u5FEB\u901F\u5217\u8868</synonym>
+    <synonym>\u8F6C\u6362\u5FEB\u901F\u5217\u8868</synonym>
+    <synonym>\u5220\u9664\u5FEB\u901F\u5217\u8868</synonym>
+
+  </configurable>
+
+  <configurable id="project.propCompiler" configurable_name="\u7F16\u8BD1\u5668">
+  </configurable>
+  <configurable id="preferences.lookFeel" configurable_name="\u89C6\u56FE">
+  </configurable>
+  <configurable id="preferences.sourceCode" configurable_name="\u5168\u5C40&#10;\u4EE3\u7801\u6837\u5F0F">
+  </configurable>
+  <configurable id="project.propVCSSupport" configurable_name="\u7248\u672C\u63A7\u5236">
+  </configurable>
+  <configurable id="preferences.sourceCode" configurable_name="\u5DE5\u7A0B&#10;\u4EE3\u7801\u6837\u5F0F">
+  </configurable>
+  <configurable id="project.propLocalVCS" configurable_name="\u672C\u5730\u8BB0\u5F55">
+    <synonym>\u6062\u590D</synonym>
+    <synonym>\u67E5\u770B\u9879\u76EE\u53D8\u66F4</synonym>
+    <synonym>\u56DE\u6EDA\u66F4\u6539</synonym>
+    <synonym>\u6807\u7B7E\u9879\u76EE</synonym>
+    <synonym>\u6062\u590D\u9879\u76EE</synonym>
+    <synonym>\u6062\u590D\u9879\u76EE</synonym>
+    <synonym>\u67E5\u770B\u9879\u76EE\u5386\u53F2</synonym>
+    <synonym>\u7248\u672C\u5BF9\u6BD4</synonym>
+    <synonym>\u67E5\u770B\u9879\u76EE\u4FEE\u8BA2</synonym>
+
+  </configurable>
+  <configurable id="preferences.general" configurable_name="\u5E38\u89C4">
+    <synonym>abracadabra</synonym>
+  </configurable>
+  <configurable id="preferences.codeCompletion" configurable_name="\u4EE3\u7801\u5B8C\u6210">
+  </configurable>
+
+  <configurable id="preferences.externalResources" configurable_name="\u8D44\u6E90">
+    <synonym>\u65B0\u5EFA\u5916\u90E8\u8D44\u6E90</synonym>
+    <synonym>\u79FB\u9664\u5916\u90E8\u8D44\u6E90</synonym>
+    <synonym>\u7F16\u8F91\u5916\u90E8\u8D44\u6E90</synonym>
+    <synonym>\u8BBE\u7F6E\u8D44\u6E90\u4F4D\u7F6E</synonym>
+    <synonym>\u5916\u90E8\u8D44\u6E90\u4F4D\u7F6E</synonym>
+    <synonym>\u5916\u90E8\u8D44\u6E90\u8BBE\u7F6E</synonym>
+    <synonym>\u7BA1\u7406\u5916\u90E8\u8D44\u6E90</synonym>
+  </configurable>
+
+
+  <configurable id="preferences.customizations" configurable_name="\u81EA\u5B9A\u4E49">
+
+    <synonym>\u81EA\u5B9A\u4E49\u754C\u9762</synonym>
+    <synonym>\u81EA\u5B9A\u4E49\u83DC\u5355</synonym>
+    <synonym>\u81EA\u5B9A\u4E49\u754C\u9762</synonym>
+    <synonym>\u81EA\u5B9A\u4E49\u83DC\u5355</synonym>
+    <synonym>\u81EA\u5B9A\u4E49\u5DE5\u5177\u680F</synonym>
+    <synonym>\u6DFB\u52A0\u5DE5\u5177\u680F\u6309\u94AE</synonym>
+    <synonym>\u5220\u9664\u5DE5\u5177\u680F\u6309\u94AE</synonym>
+    <synonym>\u7F16\u8F91\u5DE5\u5177\u680F\u6309\u94AE</synonym>
+    <synonym>\u6DFB\u52A0\u83DC\u5355\u6216\u5B50\u83DC\u5355</synonym>
+    <synonym>\u5220\u9664\u6216\u5B50\u83DC\u5355</synonym>
+    <synonym>\u7F16\u8F91\u83DC\u5355\u6216\u5B50\u83DC\u5355</synonym>
+    <synonym>\u91CD\u65B0\u6392\u5217\u5DE5\u5177\u680F\u6309\u94AE</synonym>
+    <synonym>\u91CD\u65B0\u6392\u5217\u83DC\u5355\u6216\u5B50\u83DC\u5355</synonym>
+    <synonym>\u6DFB\u52A0\u83DC\u5355\u6216\u5B50\u83DC\u5355</synonym>
+    <synonym>\u7F16\u8F91\u83DC\u5355\u5143\u7D20</synonym>
+    <synonym>\u5220\u9664\u83DC\u5355\u6216\u5B50\u83DC\u5355</synonym>
+    <synonym>\u7F16\u8F91\u83DC\u5355\u6216\u5B50\u83DC\u5355</synonym>
+    <synonym>\u66F4\u6539\u5DE5\u5177\u680F\u6309\u94AE\u6216\u83DC\u5355\u9879\u7684\u56FE\u6807</synonym>
+    <synonym>\u8BBE\u7F6E\u5DE5\u5177\u680F\u6309\u94AE\u6216\u83DC\u5355\u9879\u7684\u56FE\u6807</synonym>
+    <synonym>\u8BBE\u7F6E\u63A5\u53E3\u65B9\u6848</synonym>
+    <synonym>\u521B\u5EFA\u63A5\u53E3\u65B9\u6848</synonym>
+    <synonym>\u5220\u9664\u63A5\u53E3\u65B9\u6848</synonym>
+    <synonym>\u9009\u62E9\u63A5\u53E3\u65B9\u6848</synonym>
+
+  </configurable>
+
+  <configurable id="preferences.updates" configurable_name="\u66F4\u65B0">
+    <synonym>\u81EA\u52A8\u66F4\u65B0</synonym>
+    <synonym>\u5173\u95ED\u81EA\u52A8\u66F4\u65B0</synonym>
+    <synonym>\u68C0\u67E5\u7248\u672C</synonym>
+    <synonym>\u66F4\u65B0IDEA</synonym>
+    <synonym>\u624B\u52A8\u66F4\u65B0</synonym>
+
+  </configurable>
+
+  <configurable id="errors" configurable_name="Errors">
+  </configurable>
+
+  <configurable id="preferences.toDoOptions" configurable_name="TODO">
+    <synonym>\u67E5\u770Btodo\u5217\u8868</synonym>
+    <synonym>\u7BA1\u7406todo\u5217\u8868</synonym>
+    <synonym>\u6DFB\u52A0todo</synonym>
+    <synonym>\u79FB\u9664todo</synonym>
+    <synonym>\u8FC7\u6EE4todo\u5217\u8868</synonym>
+    <synonym>\u7BA1\u7406todo\u5217\u8868\u8FC7\u6EE4</synonym>
+    <synonym>\u6DFB\u52A0todo\u5217\u8868\u8FC7\u6EE4</synonym>
+    <synonym>\u79FB\u9664todo\u5217\u8868\u8FC7\u6EE4</synonym>
+    <synonym>\u4EFB\u52A1\u5217\u8868</synonym>
+    <synonym>\u4EFB\u52A1\u5217\u8868</synonym>
+
+
+  </configurable>
+
+
+  <configurable id="editing.templates" configurable_name="\u52A8\u6001\u6A21\u7248">
+    <synonym>\u4EE3\u7801\u6A21\u7248</synonym>
+    <synonym>\u7528\u6A21\u7248\u5305\u542B\u4EE3\u7801</synonym>
+    <synonym>\u521B\u5EFA\u4EE3\u7801\u6A21\u7248</synonym>
+    <synonym>\u7BA1\u7406\u4EE3\u7801\u6A21\u7248</synonym>
+    <synonym>\u6DFB\u52A0\u4EE3\u7801\u6A21\u7248</synonym>
+    <synonym>\u79FB\u9664\u4EE3\u7801\u6A21\u7248</synonym>
+    <synonym>\u81EA\u5B9A\u4E49\u65B0\u7684\u4EE3\u7801\u6A21\u7248</synonym>
+    <synonym>\u4FEE\u6539\u4EE3\u7801\u6A21\u7248</synonym>
+
+  </configurable>
+
+  <configurable id="preferences.applicationServers" configurable_name="\u5E94\u7528\u670D\u52A1\u5668">
+    <synonym>J2EE\u521B\u5EFA\u8BBE\u7F6E</synonym>
+    <synonym>\u7BA1\u7406\u5E94\u7528\u670D\u52A1\u5668\u9A8C\u8BC1</synonym>
+    <synonym>J2EE\u5E94\u7528\u8BBE\u7F6E</synonym>
+    <synonym>\u7BA1\u7406JAR, exploded directory and WAR \u8BBE\u7F6E</synonym>
+    <synonym>J2EE\u5E94\u7528\u8BBE\u7F6E</synonym>
+    <synonym>\u8BBE\u7F6E\u5E94\u7528\u7A0B\u5E8F\u63CF\u8FF0\u7B26</synonym>
+    <synonym>J2EE\u5E94\u7528\u7A0B\u5E8F\u90E8\u7F72\u8BBE\u7F6E</synonym>
+    <synonym>J2EE\u5E94\u7528\u8BBE\u7F6E</synonym>
+    <synonym>J2EE\u5E94\u7528\u8BBE\u7F6E</synonym>
+    <synonym>\u7BA1\u7406\u90E8\u7F72\u63CF\u8FF0\u7B26</synonym>
+    <synonym>\u7BA1\u7406\u6A21\u5757\u8BBE\u7F6E</synonym>
+    <synonym>J2EE\u5E94\u7528\u8BBE\u7F6E</synonym>
+
+  </configurable>
+
+
+  <configurable id="preferences.colorsFonts" configurable_name="\u989C\u8272 &amp; \u5B57\u4F53">
+  </configurable>
+  <configurable id="preferences.jdkGlobalLibs" configurable_name="JDK &amp;&#10;\u5168\u5C40\u5E93">
+  </configurable>
+  <configurable id="preferences.fileTypes" configurable_name="\u6587\u4EF6\u7C7B\u578B">
+
+    <synonym>\u65B0\u5EFA\u6587\u4EF6\u7C7B\u578B</synonym>
+    <synonym>\u79FB\u9664\u6587\u4EF6\u7C7B\u578B</synonym>
+    <synonym>\u7F16\u8F91\u6587\u4EF6\u7C7B\u578B</synonym>
+    <synonym>\u7BA1\u7406\u6587\u4EF6\u7C7B\u578B</synonym>
+    <synonym>\u7F16\u8F91\u6587\u4EF6\u6269\u5C55\u540D</synonym>
+    <synonym>\u7F16\u8F91\u6587\u4EF6\u5173\u8054</synonym>
+    <synonym></synonym>
+
+  </configurable>
+  <configurable id="project.propGUI" configurable_name="GUI\u8BBE\u8BA1">
+
+  </configurable>
+  <configurable id="fileTemplates" configurable_name="\u6587\u4EF6\u6A21\u7248">
+
+    <synonym>\u4EE3\u7801\u6A21\u7248</synonym>
+    <synonym>\u81EA\u5B9A\u4E49\u6A21\u7248</synonym>
+    <synonym>\u81EA\u5B9A\u4E49\u5305\u542B</synonym>
+    <synonym>\u5305\u542B\u6A21\u7248</synonym>
+    <synonym>J2EE\u6A21\u7248</synonym>
+    <synonym>\u65B0\u6A21\u7248</synonym>
+    <synonym>\u6DFB\u52A0\u6A21\u7248</synonym>
+    <synonym>\u6587\u4EF6\u6A21\u7248</synonym>
+    <synonym>\u7BA1\u7406\u6A21\u7248</synonym>
+
+  </configurable>
+
+  <configurable id="preferences.editor" configurable_name="\u7F16\u8F91\u5668">
+
+  </configurable>
+
+  <configurable id="preferences.externalTools" configurable_name="\u5916\u90E8\u5DE5\u5177">
+    <synonym>\u7BA1\u7406\u5DE5\u5177</synonym>
+    <synonym>\u914D\u7F6E\u5DE5\u5177</synonym>
+    <synonym>\u6574\u7406\u5DE5\u5177</synonym>
+    <synonym>\u79FB\u9664\u5DE5\u5177</synonym>
+    <synonym>\u5916\u90E8\u5DE5\u5177\u8BBE\u7F6E</synonym>
+    <synonym>\u5728IDEA\u6DFB\u52A0\u4E00\u4E2A\u63D2\u4EF6\u5DE5\u5177</synonym>
+    <synonym>\u5904\u7406\u5916\u90E8\u8D44\u6E90</synonym>
+
+  </configurable>
+
+  <configurable id="preferences.intentionPowerPack" configurable_name="\u610F\u5411\u8BBE\u7F6E">
+    <synonym>\u5FEB\u901F\u4FEE\u590D</synonym>
+    <synonym>\u9519\u8BEF\u9AD8\u4EAE</synonym>
+    <synonym>\u8FD0\u884C\u4E2D\u9519\u8BEF\u68C0\u6D4B</synonym>
+    <synonym>\u610F\u5411\u64CD\u4F5C</synonym>
+    <synonym>\u4EE3\u7801\u9519\u8BEF\u9AD8\u4EAE</synonym>
+
+  </configurable>
+
+  <configurable id="preferences.pathVariables" configurable_name="\u8DEF\u5F84\u53D8\u91CF">
+    <synonym>\u73AF\u5883\u8BBE\u7F6E</synonym>
+    <synonym>\u73AF\u5883\u5B57\u7B26\u4E32</synonym>
+    <synonym>\u7CFB\u7EDF\u8DEF\u5F84</synonym>
+    <synonym>\u66FF\u4EE3\u8DEF\u5F84</synonym>
+    <synonym>\u672C\u5730\u641C\u7D22</synonym>
+
+  </configurable>
+
+  <configurable id="preferences.pluginManager" configurable_name="\u63D2\u4EF6">
+    <synonym>\u7BA1\u7406\u63D2\u4EF6</synonym>
+    <synonym>\u5B89\u88C5\u63D2\u4EF6</synonym>
+    <synonym>\u79FB\u9664\u63D2\u4EF6</synonym>
+    <synonym>\u914D\u7F6E\u63D2\u4EF6</synonym>
+    <synonym>\u66F4\u65B0\u63D2\u4EF6</synonym>
+    <synonym>\u67E5\u770B\u63D2\u4EF6</synonym>
+    <synonym>\u67E5\u770B\u63D2\u4EF6\u7EDF\u8BA1\u6570\u636E</synonym>
+    </configurable>
+
+  <configurable id="web.server" configurable_name="\u90E8\u7F72">
+    <synonym>\u670D\u52A1\u5668</synonym>
+    <synonym>\u4E3B\u673A</synonym>
+    <synonym>\u8FDC\u7A0B</synonym>
+    <synonym>\u7F51\u7EDC\u8DEF\u5F84</synonym>
+  </configurable>
+
+</options>
+
