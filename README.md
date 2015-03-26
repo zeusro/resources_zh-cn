@@ -2,11 +2,11 @@
 # android studio汉化
 
 ##android studio 版本
-1.1.0
+window版 1.1.0 
 
 ## 使用
 
-1
+1进入resources_zh-cn目录生成包
 
 `jar cvf  resources_en.jar * `
 
