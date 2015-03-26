@@ -1,1 +1,9 @@
 F:\MyOpenSourceLife\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\bin\Debug\MyTextAnalyzer.exe.config
+F:\MyOpenSourceLife\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\bin\Debug\MyTextAnalyzer.exe
+F:\MyOpenSourceLife\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\bin\Debug\MyTextAnalyzer.pdb
+F:\MyOpenSourceLife\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\obj\Debug\MyTextAnalyzer.csprojResolveAssemblyReference.cache
+F:\MyOpenSourceLife\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\obj\Debug\MyTextAnalyzer.Form1.resources
+F:\MyOpenSourceLife\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\obj\Debug\MyTextAnalyzer.Properties.Resources.resources
+F:\MyOpenSourceLife\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\obj\Debug\MyTextAnalyzer.csproj.GenerateResource.Cache
+F:\MyOpenSourceLife\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\obj\Debug\MyTextAnalyzer.exe
+F:\MyOpenSourceLife\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\obj\Debug\MyTextAnalyzer.pdb
