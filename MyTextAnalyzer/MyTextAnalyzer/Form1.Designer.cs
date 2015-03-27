@@ -49,6 +49,8 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // PathOld
@@ -91,7 +93,7 @@
             this.PathTarget.Name = "PathTarget";
             this.PathTarget.Size = new System.Drawing.Size(471, 21);
             this.PathTarget.TabIndex = 0;
-            this.PathTarget.Text = "F:\\MyOpenSourceLife\\resources_zh-cn\\MyTextAnalyzer\\Result\\messages";
+            this.PathTarget.Text = "F:\\MyOpenSourceLife\\resources_zh-cn\\MyTextAnalyzer\\Result";
             // 
             // label3
             // 
@@ -117,11 +119,11 @@
             this.Result.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Result.Location = new System.Drawing.Point(13, 240);
+            this.Result.Location = new System.Drawing.Point(13, 264);
             this.Result.Multiline = true;
             this.Result.Name = "Result";
             this.Result.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.Result.Size = new System.Drawing.Size(652, 372);
+            this.Result.Size = new System.Drawing.Size(652, 348);
             this.Result.TabIndex = 3;
             // 
             // button2
@@ -236,11 +238,33 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(573, 174);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(103, 23);
+            this.button5.TabIndex = 8;
+            this.button5.Text = "导出待汉化文件";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(587, 58);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 9;
+            this.button6.Text = "退出";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(682, 624);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -293,6 +317,8 @@
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
     }
 }
 
