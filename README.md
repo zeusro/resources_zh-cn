@@ -1,7 +1,8 @@
 
 # android studio汉化
-
+原理很简单，lib目录下的resources_en.jar这个包就是编辑器相关的，解压好就是那几个文件夹，其中messages文件夹就是语言相关的。由于编码问题，不能直接打开，要用别的工具编辑。
 ##android studio 版本
+
 window版 1.1.0 
 
 ##todo
@@ -48,4 +49,4 @@ VcsBundle
 本人没有Mac,不装Linux。所以
 
 ## 如何参与汉化？
-用eclipse或myeclipse打开\MyTextAnalyzer\Result文件，编辑后pull request过来就行，我会检查，然后合并。最好有上下文环境（截图，这样尽可能的避免误翻）
+用eclipse+properties-editor插件或myeclipse打开\MyTextAnalyzer\Result文件，编辑后pull request过来就行，由于编码问题，最好附上中文，我会检查，然后合并。最好有上下文环境（截图，这样尽可能的避免误翻）
