@@ -63,7 +63,7 @@ namespace MyTextAnalyzer
                             }
                             //oldTextList = oldTextList.OrderBy(o => o.ToString()).ToList();
                         }
-                    } 
+                    }
                     #endregion
                     using (StreamReader sr = new StreamReader(propertiePath, Encoding.ASCII))//原文文件
                     {
@@ -173,14 +173,23 @@ namespace MyTextAnalyzer
                 var files = Directory.GetFiles(Pathnew, "*.properties", SearchOption.TopDirectoryOnly).ToList();//原文目录
                 for (int i = 0; i < files.Count; i++)
                 {
-                    //遍历文件，然后从旧的文件找出可以汉化的部分，然后替换掉=号后面的内容
                     string propertiePath = files.ElementAt(i);//propertie全路径
                     string fileName = propertiePath.Split('\\').Last();
-                    //Result.AppendText(string.Format("开始分析文件：{1}{0}", Environment.NewLine, propertiePath));
-                    StringBuilder sb = new StringBuilder();//记录汉化文
-                    StringBuilder sb2 = new StringBuilder();//记录原文
+                    Result.AppendText(string.Format("开始分析文件：{1}{0}", Environment.NewLine, propertiePath));
                     StringBuilder sb4 = new StringBuilder();//记录原文
                     List<string> old = new List<string>();
+                    #region 读取已汉化文件
+                    List<string> oldTextList = new List<string>();
+                    using (StreamReader sr2 = new StreamReader(Path.Combine(Pathold, fileName), Encoding.ASCII))
+                    {
+                        //读取已汉化文件
+                        while (!sr2.EndOfStream)
+                        {
+                            oldTextList.Add(sr2.ReadLine());
+                        }
+                        oldTextList = oldTextList.OrderBy(o => o.ToString()).ToList();
+                    } 
+                    #endregion
                     using (StreamReader sr = new StreamReader(propertiePath, Encoding.ASCII))
                     {
                         int line = 0;
@@ -198,27 +207,6 @@ namespace MyTextAnalyzer
                             line++;
                             old.Add(a);
                             //Result.AppendText(string.Format("{2}行为：{1}{0}", Environment.NewLine, a, line++));
-                            using (StreamReader sr2 = new StreamReader(Path.Combine(Pathold, fileName), Encoding.ASCII))
-                            //读取已汉化文件
-                            {
-                                //打开新文件，然后遍历旧文件的每一行，然后替换，追加到sb,最后把sb输出到新目录里面
-                                List<string> oldTextList = new List<string>();
-                                while (!sr2.EndOfStream)
-                                {
-                                    oldTextList.Add(sr2.ReadLine());
-                                }
-                                //oldTextList = oldTextList.OrderBy(o => o.ToString()).ToList();
-                                string newhead = a.Split('=').First();//原文头部
-                                string fine = oldTextList.Where(o => o.StartsWith(newhead)).FirstOrDefault();//汉化文
-                                if (fine != null)//有汉化文
-                                {
-                                    sb.AppendLine(fine);//汉化文
-                                }
-                                else
-                                {
-                                    sb2.AppendLine(a);//原文
-                                }
-                            }
                         }
                         Result.AppendText(string.Format("原文：{0}行，多余行：{1}排序后：{2}行;出入行：{3}{4}", line, duoyuLine, old.Count, line - duoyuLine - old.Count, Environment.NewLine));
                     }
@@ -227,6 +215,10 @@ namespace MyTextAnalyzer
                     for (int j = 0; j < old.Count; j++)
                     {
                         sb3.AppendLine(old.ElementAt(j));
+                    }
+                    if (VScroll)
+                    {
+                        
                     }
                     using (FileStream fs = new FileStream(Path.Combine(textBox5.Text, fileName), FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
                     {//排序原文
@@ -341,6 +333,26 @@ namespace MyTextAnalyzer
         private void button6_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void 切换中文(object sender, EventArgs e)
+        {
+            Action action = new Action(() =>
+            {
+                File.Copy(Path.Combine(textBox1.Text, "resources_en.jar"), Path.Combine(textBox3.Text, "resources_en.jar"), true);
+                MessageBox.Show("切换中文成功");
+            });
+            TryCatch(action);
+        }
+
+        private void 切换英文(object sender, EventArgs e)
+        {
+            Action action = new Action(() =>
+           {
+               File.Copy(Path.Combine(textBox2.Text, "resources_en.jar"), Path.Combine(textBox3.Text, "resources_en.jar"), true);
+               MessageBox.Show("切换英文成功");
+           });
+            TryCatch(action);
         }
     }
 }

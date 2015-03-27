@@ -134,6 +134,7 @@
             this.button2.TabIndex = 4;
             this.button2.Text = "切换中文";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.切换中文);
             // 
             // button3
             // 
@@ -143,6 +144,7 @@
             this.button3.TabIndex = 4;
             this.button3.Text = "切换英文";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.切换英文);
             // 
             // textBox1
             // 
@@ -150,6 +152,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(471, 21);
             this.textBox1.TabIndex = 5;
+            this.textBox1.Text = "C:\\Users\\Z\\Desktop\\temp\\backup\\汉化版";
             // 
             // label4
             // 
