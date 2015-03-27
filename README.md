@@ -5,31 +5,26 @@
 window版 1.1.0 
 
 ##todo
-ApplicationBundle.properties
+### 汉化
+ApplicationBundle
 
-CodeInsightBundle.properties
+CodeInsightBundle
 
-CommonBundle.properties
+CommonBundle
 
-DebuggerBundle.properties
+DebuggerBundle
 
-ExecutionBundle.properties
+ExecutionBundle
 
-IdeBundle.properties
+InspectionsBundle
 
-InspectionsBundle.properties
+OptionsBundle
 
-OptionsBundle.properties
+RefactoringBundle
 
-RefactoringBundle.properties
-
-VcsBundle.properties
-
-XmlBundle.properties
-
-文件分析的改进
-
-以汉化列表的持久化
+VcsBundle
+### 处理一些遗漏的
+### 优化
 
 
 ## 使用
@@ -53,4 +48,4 @@ XmlBundle.properties
 本人没有Mac,不装Linux。所以
 
 ## 如何参与汉化？
-用eclipse或myeclipse打开那些操蛋文件，编辑后pull request过来就行，我会检查，然后合并
+用eclipse或myeclipse打开\MyTextAnalyzer\Result文件，编辑后pull request过来就行，我会检查，然后合并。最好有上下文环境（截图，这样尽可能的避免误翻）
