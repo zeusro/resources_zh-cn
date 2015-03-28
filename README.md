@@ -7,7 +7,6 @@ window版 1.1.0
 
 ##todo
 ### 汉化
-ApplicationBundle
 
 CodeInsightBundle
 
