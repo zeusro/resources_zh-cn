@@ -19,7 +19,6 @@ ExecutionBundle
 
 InspectionsBundle
 
-OptionsBundle
 
 RefactoringBundle
 
