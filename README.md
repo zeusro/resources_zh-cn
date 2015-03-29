@@ -10,14 +10,11 @@ window版 1.1.0
 
 CodeInsightBundle
 
-CommonBundle
-
 DebuggerBundle
 
 ExecutionBundle
 
 InspectionsBundle
-
 
 RefactoringBundle
 

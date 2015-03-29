@@ -9,7 +9,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Data.SqlClient;
+using Dapper;
+using System.Web;
+using Newtonsoft.Json;
 namespace MyTextAnalyzer
 {
     public partial class Form1 : Form
@@ -134,7 +137,7 @@ namespace MyTextAnalyzer
             Pathtarget = PathTarget.Text;
         }
 
-        private void TryCatch(Action action)
+        private void TryCatch(Action action, bool isAutoExit = false)
         {
             try
             {
@@ -143,8 +146,12 @@ namespace MyTextAnalyzer
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
+                if (isAutoExit)
+                    Application.Exit();
             }
         }
+
+
 
         private void Clear()
         {
@@ -188,7 +195,7 @@ namespace MyTextAnalyzer
                             oldTextList.Add(sr2.ReadLine());
                         }
                         oldTextList = oldTextList.OrderBy(o => o.ToString()).ToList();
-                    } 
+                    }
                     #endregion
                     using (StreamReader sr = new StreamReader(propertiePath, Encoding.ASCII))
                     {
@@ -218,7 +225,7 @@ namespace MyTextAnalyzer
                     }
                     if (VScroll)
                     {
-                        
+
                     }
                     using (FileStream fs = new FileStream(Path.Combine(textBox5.Text, fileName), FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
                     {//排序原文
@@ -335,24 +342,112 @@ namespace MyTextAnalyzer
             Application.Exit();
         }
 
-        private void 切换中文(object sender, EventArgs e)
+        /// <summary>
+        /// 数据持久化
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button2_Click(object sender, EventArgs e)
         {
-            Action action = new Action(() =>
+            string con = "Data Source=.;Initial Catalog=AndroidStudiozh_CN;User Id=sa;Password=sa;Min Pool Size=0;Max Pool Size = 515;Connection Lifetime=0;";
+            Clear();
+            Result.AppendText(string.Format("开始装逼{0}", Environment.NewLine));
+            Initialize();
+            var files = Directory.GetFiles(textBox5.Text, "*.properties", SearchOption.TopDirectoryOnly).ToList();//读取排序好的原文目录
+            //遍历文件
+            for (int i = 0; i < files.Count; i++)
             {
-                File.Copy(Path.Combine(textBox1.Text, "resources_en.jar"), Path.Combine(textBox3.Text, "resources_en.jar"), true);
-                MessageBox.Show("切换中文成功");
-            });
-            TryCatch(action);
+                //遍历文件，然后从旧的文件找出可以汉化的部分，然后替换掉=号后面的内容
+                string propertiePath = files.ElementAt(i);//原文propertie全路径
+                string fileName = propertiePath.Split('\\').Last();//文件名
+                Result.AppendText(string.Format("开始分析文件：{1}{0}", Environment.NewLine, propertiePath));
+                StringBuilder sb = new StringBuilder();//记录汉化文
+                StringBuilder sb2 = new StringBuilder();//记录原文
+                List<string> old = new List<string>();
+                string zh_cnPath = Path.Combine(Pathold, fileName);
+                List<string> oldTextList = new List<string>();
+                #region 加载已汉化文件
+                if (File.Exists(zh_cnPath))
+                {
+                    using (StreamReader sr2 = new StreamReader(Path.Combine(Pathold, fileName), Encoding.UTF8))
+                    {
+                        while (!sr2.EndOfStream)
+                        {
+                            oldTextList.Add(sr2.ReadLine());
+                        }
+                        //oldTextList = oldTextList.OrderBy(o => o.ToString()).ToList();
+                    }
+                }
+                #endregion
+                using (StreamReader sr = new StreamReader(propertiePath, Encoding.ASCII))//原文文件
+                {
+                    int line = 0;
+                    while (!sr.EndOfStream)
+                    {
+                        line++;
+                        string a = sr.ReadLine();//原文
+                        if (string.IsNullOrWhiteSpace(a) || !a.Contains("=") || a.StartsWith("#"))
+                        {
+                            continue;
+                        }
+                        //Result.AppendText(string.Format("{2}行为：{1}{0}", Environment.NewLine, a, line++));
+                        string newhead = a.Split('=').First();//原文头部
+                        string fine = oldTextList.Where(o => o.StartsWith(newhead)).FirstOrDefault();//汉化文  
+                        string TextValue = (a.Split('=').Last() ?? "");
+                        string TextValueCN = fine.Split('=').Last() ?? "";
+
+                        Encoding origin = Encoding.UTF8;
+                        Encoding targetEnco = Encoding.GetEncoding(936);
+                        byte[] ansiBytes = origin.GetBytes(TextValueCN);
+                        byte[] utf8Bytes = Encoding.Convert(origin, targetEnco, ansiBytes);
+                        string cn = targetEnco.GetString(utf8Bytes);
+                        cn = "";
+                        //TODO:UTF→GBK
+
+                        //string temp = "[{\"Data\":\"" + TextValueCN + "\"}]";
+                        ////string cn = (JsonConvert.DeserializeObject<A>(temp)).Data;
+                        //var caonima = JsonConvert.SerializeObject(new A { Data = TextValueCN });
+                        ////string cn = (JsonConvert.DeserializeObject<List<A>>(caonima)).First().Data;
+                        //string cn = (JsonConvert.DeserializeObject<A>(caonima,)).Data;         
+                        try
+                        {
+                            using (SqlConnection connection = new SqlConnection(con))
+                            {
+                                connection.Open();
+                                connection.Execute(string.Format(@"insert into  [AndroidStudiozh_CN].[dbo].[Chinesization]([TextLine],[TextKey],[TextValue],[TextValueCN],[FileName],TextValueCN1)
+                                     values(@TextLine,@TextKey,@TextValue,@TextValueCN,@FileName,@TextValueCN1);"), new
+                                    {
+                                        TextLine = line,
+                                        TextKey = newhead,
+                                        TextValue = TextValue,
+                                        TextValueCN = TextValueCN,
+                                        fileName = fileName,
+                                        TextValueCN1 = cn,
+                                    });
+                            }
+                        }
+                        catch (Exception exception)
+                        {
+                            //Result.AppendText(string.Format("TextValue：{3}{0}", Environment.NewLine, line, newhead, TextValue, TextValueCN, exception.Message));
+                            Result.AppendText(string.Format("TextLine：{1}{0}TextKey：{2}{0}TextValue：{3}{0}TextValueCN：{4}{0}errormessage:{5}", Environment.NewLine, line, newhead, TextValue, TextValueCN, exception.Message));
+                        }
+                    }
+                }
+            }
+            Result.AppendText(string.Format("装逼结束{0}", Environment.NewLine));
+
+
+
+
+
+
         }
 
-        private void 切换英文(object sender, EventArgs e)
-        {
-            Action action = new Action(() =>
-           {
-               File.Copy(Path.Combine(textBox2.Text, "resources_en.jar"), Path.Combine(textBox3.Text, "resources_en.jar"), true);
-               MessageBox.Show("切换英文成功");
-           });
-            TryCatch(action);
-        }
+
+    }
+
+    public class A
+    {
+        public string Data { get; set; }
     }
 }

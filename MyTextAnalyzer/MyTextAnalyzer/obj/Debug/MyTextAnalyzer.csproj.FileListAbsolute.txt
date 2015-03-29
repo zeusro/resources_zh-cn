@@ -7,3 +7,19 @@ F:\MyOpenSourceLife\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\obj\Debug\MyTe
 F:\MyOpenSourceLife\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\obj\Debug\MyTextAnalyzer.csproj.GenerateResource.Cache
 F:\MyOpenSourceLife\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\obj\Debug\MyTextAnalyzer.exe
 F:\MyOpenSourceLife\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\obj\Debug\MyTextAnalyzer.pdb
+D:\My speciality\opensource\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\bin\Debug\MyTextAnalyzer.exe.config
+D:\My speciality\opensource\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\obj\Debug\MyTextAnalyzer.exe
+D:\My speciality\opensource\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\obj\Debug\MyTextAnalyzer.pdb
+D:\My speciality\opensource\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\obj\Debug\MyTextAnalyzer.csprojResolveAssemblyReference.cache
+D:\My speciality\opensource\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\obj\Debug\MyTextAnalyzer.Form1.resources
+D:\My speciality\opensource\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\obj\Debug\MyTextAnalyzer.Properties.Resources.resources
+D:\My speciality\opensource\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\obj\Debug\MyTextAnalyzer.csproj.GenerateResource.Cache
+D:\My speciality\opensource\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\bin\Debug\MyTextAnalyzer.exe
+D:\My speciality\opensource\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\bin\Debug\MyTextAnalyzer.pdb
+D:\My speciality\opensource\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\bin\Debug\Dapper.dll
+D:\My speciality\opensource\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\bin\Debug\Dapper.pdb
+D:\My speciality\opensource\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\bin\Debug\Dapper.xml
+D:\My speciality\opensource\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\obj\Debug\Interop.MSScriptControl.dll
+D:\My speciality\opensource\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\obj\Debug\MyTextAnalyzer.csproj.ResolveComReference.cache
+D:\My speciality\opensource\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\bin\Debug\Newtonsoft.Json.dll
+D:\My speciality\opensource\resources_zh-cn\MyTextAnalyzer\MyTextAnalyzer\bin\Debug\Newtonsoft.Json.xml
