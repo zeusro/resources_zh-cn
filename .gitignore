@@ -6,6 +6,7 @@
 *.user
 *.sln.docstates
 
+DOS/
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
