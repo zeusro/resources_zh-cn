@@ -40,6 +40,14 @@ RefactoringBundle
 
 `C:\Program Files\Android\Android Studio\lib`
 
+会用到的DOS命令:
+
+DEL "路径\resources_en.jar"
+
+:切换版本
+
+copy "路径\resources_en.jar"  "路径\Android Studio\lib"
+
 ## 有没有其他版本？
 本人没有Mac,不装Linux。所以
 
