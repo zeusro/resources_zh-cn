@@ -12,11 +12,11 @@ CodeInsightBundle
 
 DebuggerBundle
 
-ExecutionBundle
-
 InspectionsBundle
 
 RefactoringBundle
+
+XmlBundle.properties
 
 
 ### 处理一些遗漏的
