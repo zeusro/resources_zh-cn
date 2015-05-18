@@ -13,6 +13,7 @@ using System.Data.SqlClient;
 using Dapper;
 using System.Web;
 using Newtonsoft.Json;
+using System.Threading;
 namespace MyTextAnalyzer
 {
     public partial class Form1 : Form
@@ -41,7 +42,7 @@ namespace MyTextAnalyzer
                 Clear();
                 Result.AppendText(string.Format("开始装逼{0}", Environment.NewLine));
                 Initialize();
-                var files = Directory.GetFiles(textBox5.Text, "*.properties", SearchOption.TopDirectoryOnly).ToList();//读取排序号的原文目录
+                var files = Directory.GetFiles(PathNew.Text, "*.properties", SearchOption.TopDirectoryOnly).ToList();//读取排序号的原文目录
                 //遍历文件
                 //for (int i = 0; i < 1; i++)
                 for (int i = 0; i < files.Count; i++)
@@ -145,7 +146,8 @@ namespace MyTextAnalyzer
             }
             catch (Exception exception)
             {
-                MessageBox.Show(exception.Message);
+                Result.AppendText(string.Format("{1}{0}", Environment.NewLine, exception));
+                //MessageBox.Show(exception.Message);
                 if (isAutoExit)
                     Application.Exit();
             }
@@ -174,10 +176,19 @@ namespace MyTextAnalyzer
             sw.Start();
             Action action = new Action(() =>
             {
+                #region 清理工作
+                if (System.IO.Directory.Exists(PathNew.Text))
+                    System.IO.Directory.Delete(PathNew.Text, true);
+                System.IO.Directory.CreateDirectory(PathNew.Text);
+                string xxpp = @"D:\My speciality\opensource\resources_zh-cn\MyTextAnalyzer\duoyu";
+                if (System.IO.Directory.Exists(xxpp))
+                    System.IO.Directory.Delete(xxpp, true);
+                System.IO.Directory.CreateDirectory(xxpp);
+                #endregion
                 Clear();
                 Result.AppendText(string.Format("开始装逼{0}", Environment.NewLine));
                 Initialize();
-                var files = Directory.GetFiles(Pathnew, "*.properties", SearchOption.TopDirectoryOnly).ToList();//原文目录
+                var files = Directory.GetFiles(@"D:\My speciality\opensource\resources_zh-cn\resources_en\messages", "*.properties", SearchOption.TopDirectoryOnly).ToList();//原文目录
                 for (int i = 0; i < files.Count; i++)
                 {
                     string propertiePath = files.ElementAt(i);//propertie全路径
@@ -185,18 +196,6 @@ namespace MyTextAnalyzer
                     Result.AppendText(string.Format("开始分析文件：{1}{0}", Environment.NewLine, propertiePath));
                     StringBuilder sb4 = new StringBuilder();//记录原文
                     List<string> old = new List<string>();
-                    #region 读取已汉化文件
-                    List<string> oldTextList = new List<string>();
-                    using (StreamReader sr2 = new StreamReader(Path.Combine(Pathold, fileName), Encoding.ASCII))
-                    {
-                        //读取已汉化文件
-                        while (!sr2.EndOfStream)
-                        {
-                            oldTextList.Add(sr2.ReadLine());
-                        }
-                        oldTextList = oldTextList.OrderBy(o => o.ToString()).ToList();
-                    }
-                    #endregion
                     using (StreamReader sr = new StreamReader(propertiePath, Encoding.ASCII))
                     {
                         int line = 0;
@@ -223,24 +222,84 @@ namespace MyTextAnalyzer
                     {
                         sb3.AppendLine(old.ElementAt(j));
                     }
-                    if (VScroll)
-                    {
-
-                    }
-                    using (FileStream fs = new FileStream(Path.Combine(textBox5.Text, fileName), FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
+                    using (FileStream fs = new FileStream(Path.Combine(PathNew.Text, fileName), FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
                     {//排序原文
                         var bytes = System.Text.Encoding.ASCII.GetBytes(sb3.ToString());
                         fs.Write(bytes, 0, bytes.Length);
                     }
+                    #region 记录多余行
                     if (sb4.ToString().Length > 0)
                     {
-                        using (FileStream fs = new FileStream(Path.Combine(@"F:\MyOpenSourceLife\resources_zh-cn\MyTextAnalyzer\duoyu", fileName), FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
+                        using (FileStream fs = new FileStream(Path.Combine(xxpp, fileName), FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
                         {//排序原文
                             var bytes = System.Text.Encoding.ASCII.GetBytes(sb4.ToString());
                             fs.Write(bytes, 0, bytes.Length);
                         }
                     }
+                    #endregion
+
                 }
+                #region MyRegion
+                //for (int i = 0; i < files.Count; i++)
+                //{
+                //    string propertiePath = files.ElementAt(i);//propertie全路径
+                //    string fileName = propertiePath.Split('\\').Last();
+                //    Result.AppendText(string.Format("开始分析文件：{1}{0}", Environment.NewLine, propertiePath));
+                //    StringBuilder sb4 = new StringBuilder();//记录原文
+                //    List<string> old = new List<string>();
+                //    #region 读取已汉化文件
+                //    List<string> oldTextList = new List<string>();
+                //    using (StreamReader sr2 = new StreamReader(Path.Combine(Pathold, fileName), Encoding.ASCII))
+                //    {
+                //        //读取已汉化文件
+                //        while (!sr2.EndOfStream)
+                //        {
+                //            oldTextList.Add(sr2.ReadLine());
+                //        }
+                //        oldTextList = oldTextList.OrderBy(o => o.ToString()).ToList();
+                //    }
+                //    #endregion
+                //    using (StreamReader sr = new StreamReader(propertiePath, Encoding.ASCII))
+                //    {
+                //        int line = 0;
+                //        int duoyuLine = 0;
+                //        while (!sr.EndOfStream)
+                //        {
+                //            string a = sr.ReadLine();//原文
+                //            if (string.IsNullOrWhiteSpace(a) || !a.Contains("=") || a.StartsWith("#"))
+                //            {
+                //                sb4.AppendLine(a);
+                //                line++;
+                //                duoyuLine++;
+                //                continue;
+                //            }
+                //            line++;
+                //            old.Add(a);
+                //            //Result.AppendText(string.Format("{2}行为：{1}{0}", Environment.NewLine, a, line++));
+                //        }
+                //        Result.AppendText(string.Format("原文：{0}行，多余行：{1}排序后：{2}行;出入行：{3}{4}", line, duoyuLine, old.Count, line - duoyuLine - old.Count, Environment.NewLine));
+                //    }
+                //    old = old.OrderBy(o => o.ToString()).ToList();
+                //    StringBuilder sb3 = new StringBuilder();
+                //    for (int j = 0; j < old.Count; j++)
+                //    {
+                //        sb3.AppendLine(old.ElementAt(j));
+                //    }            
+                //    using (FileStream fs = new FileStream(Path.Combine(textBox5.Text, fileName), FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
+                //    {//排序原文
+                //        var bytes = System.Text.Encoding.ASCII.GetBytes(sb3.ToString());
+                //        fs.Write(bytes, 0, bytes.Length);
+                //    }
+                //    if (sb4.ToString().Length > 0)
+                //    {
+                //        using (FileStream fs = new FileStream(Path.Combine(@"F:\MyOpenSourceLife\resources_zh-cn\MyTextAnalyzer\duoyu", fileName), FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
+                //        {//排序原文
+                //            var bytes = System.Text.Encoding.ASCII.GetBytes(sb4.ToString());
+                //            fs.Write(bytes, 0, bytes.Length);
+                //        }
+                //    }
+                //} 
+                #endregion
                 Result.AppendText(string.Format("装逼结束{0}", Environment.NewLine));
             });
             TryCatch(action);
@@ -250,7 +309,7 @@ namespace MyTextAnalyzer
         }
 
         /// <summary>
-        /// 导出待汉化文件
+        /// 汉化
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -265,64 +324,101 @@ namespace MyTextAnalyzer
                 Initialize();
                 var files = Directory.GetFiles(Pathnew, "*.properties", SearchOption.TopDirectoryOnly).ToList();//原文目录
                 for (int i = 0; i < files.Count; i++)
+                //for (int i = 0; i < 1; i++)
                 {
+
                     //遍历文件，然后从旧的文件找出可以汉化的部分，然后替换掉=号后面的内容
                     string propertiePath = files.ElementAt(i);//propertie全路径
                     string fileName = propertiePath.Split('\\').Last();
+                    string outputFileName = Path.Combine(textBox4.Text, fileName);//输出汉化文件
                     Result.AppendText(string.Format("开始分析文件：{1}{0}", Environment.NewLine, propertiePath));
-                    StringBuilder sb = new StringBuilder();//记录汉化文
-                    StringBuilder sb2 = new StringBuilder();//记录原文
-                    List<string> old = new List<string>();
-                    using (StreamReader sr = new StreamReader(propertiePath, Encoding.ASCII))
+                    if (!File.Exists(Path.Combine(Pathold, fileName)))//无对应汉化文件,直接复制
                     {
+                        File.Copy(propertiePath, outputFileName, true);
+                        continue;
+                    }
+                    StringBuilder sb = new StringBuilder(5000);//记录汉化文
+                    StringBuilder sb2 = new StringBuilder(5000);//记录原文
+                    List<string> old = new List<string>();//原文
+                    var oldTextList = new Dictionary<string, string>();//汉化文
+                    using (StreamReader sr = new StreamReader(propertiePath, Encoding.ASCII))
+                    {//原文
                         int line = 0;
                         while (!sr.EndOfStream)
                         {
                             string a = sr.ReadLine();//原文
-                            if (string.IsNullOrWhiteSpace(a) || !a.Contains("=") || a.StartsWith("#"))
-                            {
-                                line++;
-                                continue;
-                            }
+                            //if (string.IsNullOrWhiteSpace(a) || !a.Contains("=") || a.StartsWith("#"))
+                            //{
+                            //    line++;
+                            //    continue;
+                            //}
                             old.Add(a);
                             //Result.AppendText(string.Format("{2}行为：{1}{0}", Environment.NewLine, a, line++));
-                            using (StreamReader sr2 = new StreamReader(Path.Combine(Pathold, fileName), Encoding.ASCII))
-                            //读取已汉化文件
+                        }
+                    }
+                    #region 加载汉化文
+                    using (StreamReader sr2 = new StreamReader(Path.Combine(Pathold, fileName), Encoding.ASCII))
+                    { //读取已汉化文件
+                        //List<string> oldTextList = new List<string>();                        
+                        while (!sr2.EndOfStream)
+                        {
+                            string znch = sr2.ReadLine();
+                            if (!string.IsNullOrWhiteSpace(znch))
                             {
-                                //打开新文件，然后遍历旧文件的每一行，然后替换，追加到sb,最后把sb输出到新目录里面
-                                List<string> oldTextList = new List<string>();
-                                while (!sr2.EndOfStream)
+                                if (znch.Contains('='))
                                 {
-                                    oldTextList.Add(sr2.ReadLine());
-                                }
-                                //oldTextList = oldTextList.OrderBy(o => o.ToString()).ToList();
-                                string newhead = a.Split('=').First();//原文头部
-                                string fine = oldTextList.Where(o => o.StartsWith(newhead)).FirstOrDefault();//汉化文
-                                if (fine != null)//有汉化文
-                                {
-                                    sb.AppendLine(fine);//汉化文
-                                }
-                                else
-                                {
-                                    sb2.AppendLine(a);//原文
+                                    var temp = znch.Split('=');
+                                    if (!oldTextList.ContainsKey(temp.ElementAt(0).Trim()))
+                                        oldTextList.Add(temp.ElementAt(0).Trim(), temp.ElementAt(1).Trim());
                                 }
                             }
                         }
+                    #endregion
                     }
-                    string outputFileName = Path.Combine(textBox4.Text, fileName);
-                    if (File.Exists(outputFileName))
+                    #region 导入文本
+                    //oldTextList = oldTextList.OrderBy(o => o.ToString()).ToList();
+                    for (int j = 0; j < old.Count; j++)
                     {
-                        File.Delete(outputFileName);
+                        string newhead = old.ElementAt(j).Split('=').First().Trim();//原文头部
+                        if (oldTextList.ContainsKey(newhead))
+                        {
+                            //有汉化文
+                            //string fine = oldTextList.Where(o => o.StartsWith(newhead)).FirstOrDefault();//汉化文  
+                            string fine = newhead + "=" + oldTextList[newhead];
+                            sb.AppendLine(fine);//汉化文    
+                        }
+                        else
+                        {
+                            sb2.AppendLine(old.ElementAt(j));//原文
+                        }
                     }
+                    //Result.AppendText(string.Format("{1}{0}", Environment.NewLine, old.Count));
+                    //Result.AppendText(string.Format("{1}{0}", Environment.NewLine, oldTextList.Count));                    
+                    #endregion
+                    #region 输出文本
+                    if (File.Exists(outputFileName))
+                        File.Delete(outputFileName);
+                    //待汉化的字符(原文)在前               
                     if (sb2.ToString().Length > 0)
                     {
                         using (FileStream fs = new FileStream(outputFileName, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
                         {
                             var bytes = System.Text.Encoding.ASCII.GetBytes(sb2.ToString());
+                            fs.Write(bytes, 0, bytes.Length);                            
+                        }
+                    }
+                    if (sb.ToString().Length > 0)
+                    {
+                        using (FileStream fs = File.OpenWrite(outputFileName))
+                        {
+                            //设定书写的開始位置为文件的末尾    
+                            fs.Position = fs.Length;
+                            //将待写入内容追加到文件末尾  
+                            var bytes = System.Text.Encoding.ASCII.GetBytes(sb.ToString());
                             fs.Write(bytes, 0, bytes.Length);
                         }
-                        //待汉化的字符在前
                     }
+                    #endregion
                 }
                 Result.AppendText(string.Format("装逼结束{0}", Environment.NewLine));
             });
@@ -353,7 +449,7 @@ namespace MyTextAnalyzer
             Clear();
             Result.AppendText(string.Format("开始装逼{0}", Environment.NewLine));
             Initialize();
-            var files = Directory.GetFiles(textBox5.Text, "*.properties", SearchOption.TopDirectoryOnly).ToList();//读取排序好的原文目录
+            var files = Directory.GetFiles(PathNew.Text, "*.properties", SearchOption.TopDirectoryOnly).ToList();//读取排序好的原文目录
             //遍历文件
             for (int i = 0; i < files.Count; i++)
             {
@@ -438,16 +534,9 @@ namespace MyTextAnalyzer
 
 
 
-
-
-
         }
 
 
     }
 
-    public class A
-    {
-        public string Data { get; set; }
-    }
 }

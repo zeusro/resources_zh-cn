@@ -30,15 +30,13 @@
         {
             this.PathOld = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.PathNew = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.PathTarget = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.Result = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.PathNew = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -52,7 +50,7 @@
             this.PathOld.Name = "PathOld";
             this.PathOld.Size = new System.Drawing.Size(471, 21);
             this.PathOld.TabIndex = 0;
-            this.PathOld.Text = "D:\\My speciality\\opensource\\resources_zh-cn\\MyTextAnalyzer\\Result";
+            this.PathOld.Text = "D:\\My speciality\\Java\\fanyi\\Result";
             // 
             // label1
             // 
@@ -62,23 +60,6 @@
             this.label1.Size = new System.Drawing.Size(77, 12);
             this.label1.TabIndex = 1;
             this.label1.Text = "旧的汉化目录";
-            // 
-            // PathNew
-            // 
-            this.PathNew.Location = new System.Drawing.Point(96, 39);
-            this.PathNew.Name = "PathNew";
-            this.PathNew.Size = new System.Drawing.Size(471, 21);
-            this.PathNew.TabIndex = 0;
-            this.PathNew.Text = "F:\\MyOpenSourceLife\\resources_zh-cn\\resources_zh-cn\\messages";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 45);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 12);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "目标汉化目录";
             // 
             // PathTarget
             // 
@@ -116,7 +97,7 @@
             this.Result.Multiline = true;
             this.Result.Name = "Result";
             this.Result.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.Result.Size = new System.Drawing.Size(652, 465);
+            this.Result.Size = new System.Drawing.Size(719, 465);
             this.Result.TabIndex = 3;
             // 
             // textBox4
@@ -125,7 +106,7 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(471, 21);
             this.textBox4.TabIndex = 0;
-            this.textBox4.Text = "F:\\MyOpenSourceLife\\resources_zh-cn\\MyTextAnalyzer\\Todo";
+            this.textBox4.Text = "D:\\My speciality\\opensource\\resources_zh-cn\\MyTextAnalyzer\\Todo";
             // 
             // label7
             // 
@@ -136,13 +117,13 @@
             this.label7.TabIndex = 1;
             this.label7.Text = "待汉化目录";
             // 
-            // textBox5
+            // PathNew
             // 
-            this.textBox5.Location = new System.Drawing.Point(96, 120);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(471, 21);
-            this.textBox5.TabIndex = 0;
-            this.textBox5.Text = "D:\\My speciality\\opensource\\resources_zh-cn\\MyTextAnalyzer\\原文";
+            this.PathNew.Location = new System.Drawing.Point(96, 120);
+            this.PathNew.Name = "PathNew";
+            this.PathNew.Size = new System.Drawing.Size(471, 21);
+            this.PathNew.TabIndex = 0;
+            this.PathNew.Text = "D:\\My speciality\\opensource\\resources_zh-cn\\MyTextAnalyzer\\排序过的原文";
             // 
             // label8
             // 
@@ -155,7 +136,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(590, 118);
+            this.button4.Location = new System.Drawing.Point(587, 92);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 7;
@@ -165,11 +146,11 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(573, 93);
+            this.button5.Location = new System.Drawing.Point(587, 120);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(103, 23);
+            this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 8;
-            this.button5.Text = "导出待汉化文件";
+            this.button5.Text = "汉化";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -197,7 +178,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 624);
+            this.ClientSize = new System.Drawing.Size(749, 624);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
@@ -207,12 +188,10 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.PathNew);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.PathTarget);
-            this.Controls.Add(this.PathNew);
             this.Controls.Add(this.PathOld);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -226,15 +205,13 @@
 
         private System.Windows.Forms.TextBox PathOld;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox PathNew;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox PathTarget;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox Result;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox PathNew;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
