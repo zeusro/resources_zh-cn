@@ -28,109 +28,6 @@ namespace MyTextAnalyzer
         public string Pathtarget { get; private set; }
 
 
-        /// <summary>
-        /// 开始分析
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-            Action action = new Action(() =>
-            {
-                Clear();
-                Result.AppendText(string.Format("开始装逼{0}", Environment.NewLine));
-                Initialize();
-                var files = Directory.GetFiles(PathNew.Text, "*.properties", SearchOption.TopDirectoryOnly).ToList();//读取排序号的原文目录
-                //遍历文件
-                //for (int i = 0; i < 1; i++)
-                for (int i = 0; i < files.Count; i++)
-                {
-                    //遍历文件，然后从旧的文件找出可以汉化的部分，然后替换掉=号后面的内容
-                    string propertiePath = files.ElementAt(i);//原文propertie全路径
-                    string fileName = propertiePath.Split('\\').Last();//文件名
-                    Result.AppendText(string.Format("开始分析文件：{1}{0}", Environment.NewLine, propertiePath));
-                    StringBuilder sb = new StringBuilder();//记录汉化文
-                    StringBuilder sb2 = new StringBuilder();//记录原文
-                    List<string> old = new List<string>();
-                    string zh_cnPath = Path.Combine(Pathold, fileName);
-                    List<string> oldTextList = new List<string>();
-                    #region 加载已汉化文件
-                    if (File.Exists(zh_cnPath))
-                    {
-                        using (StreamReader sr2 = new StreamReader(Path.Combine(Pathold, fileName), Encoding.ASCII))
-                        {
-                            while (!sr2.EndOfStream)
-                            {
-                                oldTextList.Add(sr2.ReadLine());
-                            }
-                            //oldTextList = oldTextList.OrderBy(o => o.ToString()).ToList();
-                        }
-                    }
-                    #endregion
-                    using (StreamReader sr = new StreamReader(propertiePath, Encoding.ASCII))//原文文件
-                    {
-                        int line = 0;
-                        while (!sr.EndOfStream)
-                        {
-                            string a = sr.ReadLine();//原文
-                            if (string.IsNullOrWhiteSpace(a) || !a.Contains("=") || a.StartsWith("#"))
-                            {
-                                line++;
-                                continue;
-                            }
-                            old.Add(a);
-                            //Result.AppendText(string.Format("{2}行为：{1}{0}", Environment.NewLine, a, line++));
-                            //打开新文件，然后遍历旧文件的每一行，然后替换，追加到sb,最后把sb输出到新目录里面
-                            if (File.Exists(zh_cnPath))
-                            {
-                                string newhead = a.Split('=').First();//原文头部
-                                string fine = oldTextList.Where(o => o.StartsWith(newhead)).FirstOrDefault();//汉化文
-                                if (fine != null)//有汉化文
-                                {
-                                    sb.AppendLine(fine);//汉化文
-                                }
-                                else
-                                {
-                                    sb2.AppendLine(a);//原文
-                                }
-
-                            }
-                            else
-                            {
-                                sb2.AppendLine(a);//原文
-                            }
-                        }
-                    }
-                    string targetPath = Path.Combine(Pathtarget, fileName);
-                    if (File.Exists(targetPath))
-                    {
-                        File.Delete(targetPath);
-                    }
-                    //待汉化的字符在前
-                    using (FileStream fs = new FileStream(targetPath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
-                    {
-                        var bytes = System.Text.Encoding.ASCII.GetBytes(sb2.ToString());//原文
-                        fs.Write(bytes, 0, bytes.Length);
-                    }
-                    using (FileStream fs = new FileStream(targetPath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite))
-                    {
-                        using (StreamWriter sw2 = new StreamWriter(fs))
-                        {
-                            //汉化文
-                            sw2.WriteLine(sb.ToString());
-                        }
-                    }
-                }
-                Result.AppendText(string.Format("装逼结束{0}", Environment.NewLine));
-            });
-            TryCatch(action);
-            sw.Stop();
-            Result.AppendText(string.Format("耗时：{0}毫秒", sw.ElapsedMilliseconds));
-            //Result.AppendText(string.Format(""));
-        }
-
         private void Initialize()
         {
             Pathold = PathOld.Text;
@@ -329,7 +226,7 @@ namespace MyTextAnalyzer
 
                     //遍历文件，然后从旧的文件找出可以汉化的部分，然后替换掉=号后面的内容
                     string propertiePath = files.ElementAt(i);//propertie全路径
-                    string fileName = propertiePath.Split('\\').Last();
+                    string fileName = propertiePath.Split('\\').Last();//文件名
                     string outputFileName = Path.Combine(textBox4.Text, fileName);//输出汉化文件
                     Result.AppendText(string.Format("开始分析文件：{1}{0}", Environment.NewLine, propertiePath));
                     if (!File.Exists(Path.Combine(Pathold, fileName)))//无对应汉化文件,直接复制
@@ -340,41 +237,9 @@ namespace MyTextAnalyzer
                     StringBuilder sb = new StringBuilder(5000);//记录汉化文
                     StringBuilder sb2 = new StringBuilder(5000);//记录原文
                     List<string> old = new List<string>();//原文
-                    var oldTextList = new Dictionary<string, string>();//汉化文
-                    using (StreamReader sr = new StreamReader(propertiePath, Encoding.ASCII))
-                    {//原文
-                        int line = 0;
-                        while (!sr.EndOfStream)
-                        {
-                            string a = sr.ReadLine();//原文
-                            //if (string.IsNullOrWhiteSpace(a) || !a.Contains("=") || a.StartsWith("#"))
-                            //{
-                            //    line++;
-                            //    continue;
-                            //}
-                            old.Add(a);
-                            //Result.AppendText(string.Format("{2}行为：{1}{0}", Environment.NewLine, a, line++));
-                        }
-                    }
-                    #region 加载汉化文
-                    using (StreamReader sr2 = new StreamReader(Path.Combine(Pathold, fileName), Encoding.ASCII))
-                    { //读取已汉化文件
-                        //List<string> oldTextList = new List<string>();                        
-                        while (!sr2.EndOfStream)
-                        {
-                            string znch = sr2.ReadLine();
-                            if (!string.IsNullOrWhiteSpace(znch))
-                            {
-                                if (znch.Contains('='))
-                                {
-                                    var temp = znch.Split('=');
-                                    if (!oldTextList.ContainsKey(temp.ElementAt(0).Trim()))
-                                        oldTextList.Add(temp.ElementAt(0).Trim(), temp.ElementAt(1).Trim());
-                                }
-                            }
-                        }
-                    #endregion
-                    }
+                    var oldTextList = new Dictionary<string, string>();//汉化文                    
+                    加载原文(propertiePath, old);
+                    加载汉化文(fileName, oldTextList);
                     #region 导入文本
                     //oldTextList = oldTextList.OrderBy(o => o.ToString()).ToList();
                     for (int j = 0; j < old.Count; j++)
@@ -404,7 +269,7 @@ namespace MyTextAnalyzer
                         using (FileStream fs = new FileStream(outputFileName, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
                         {
                             var bytes = System.Text.Encoding.ASCII.GetBytes(sb2.ToString());
-                            fs.Write(bytes, 0, bytes.Length);                            
+                            fs.Write(bytes, 0, bytes.Length);
                         }
                     }
                     if (sb.ToString().Length > 0)
@@ -428,6 +293,50 @@ namespace MyTextAnalyzer
             //Result.AppendText(string.Format(""));
         }
 
+        private void 加载汉化文(string fileName, Dictionary<string, string> oldTextList)
+        {
+            string filepath = Path.Combine(Pathold, fileName);
+            if (!File.Exists(filepath))
+                return;
+            using (StreamReader sr2 = new StreamReader(filepath, Encoding.ASCII))
+            { //读取已汉化文件
+                //List<string> oldTextList = new List<string>();                        
+                while (!sr2.EndOfStream)
+                {
+                    string znch = sr2.ReadLine();
+                    if (!string.IsNullOrWhiteSpace(znch))
+                    {
+                        if (znch.Contains('='))
+                        {
+                            var temp = znch.Split('=');
+                            if (!oldTextList.ContainsKey(temp.ElementAt(0).Trim()))
+                                oldTextList.Add(temp.ElementAt(0).Trim(), temp.ElementAt(1).Trim());
+                        }
+                    }
+                }
+            }
+
+        }
+
+        private static void 加载原文(string propertiePath, List<string> old)
+        {
+            using (StreamReader sr = new StreamReader(propertiePath, Encoding.ASCII))
+            {//原文
+                int line = 0;
+                while (!sr.EndOfStream)
+                {
+                    string a = sr.ReadLine();//原文
+                    //if (string.IsNullOrWhiteSpace(a) || !a.Contains("=") || a.StartsWith("#"))
+                    //{
+                    //    line++;
+                    //    continue;
+                    //}
+                    old.Add(a);
+                    //Result.AppendText(string.Format("{2}行为：{1}{0}", Environment.NewLine, a, line++));
+                }
+            }
+        }
+
         /// <summary>
         /// 退出
         /// </summary>
@@ -449,6 +358,11 @@ namespace MyTextAnalyzer
             Clear();
             Result.AppendText(string.Format("开始装逼{0}", Environment.NewLine));
             Initialize();
+            using (SqlConnection connection = new SqlConnection(con))
+            {
+                connection.Open();
+                connection.Execute("Truncate table [AndroidStudiozh_CN].[dbo].[Chinesization]");
+            }
             var files = Directory.GetFiles(PathNew.Text, "*.properties", SearchOption.TopDirectoryOnly).ToList();//读取排序好的原文目录
             //遍历文件
             for (int i = 0; i < files.Count; i++)
@@ -461,20 +375,9 @@ namespace MyTextAnalyzer
                 StringBuilder sb2 = new StringBuilder();//记录原文
                 List<string> old = new List<string>();
                 string zh_cnPath = Path.Combine(Pathold, fileName);
-                List<string> oldTextList = new List<string>();
-                #region 加载已汉化文件
-                if (File.Exists(zh_cnPath))
-                {
-                    using (StreamReader sr2 = new StreamReader(Path.Combine(Pathold, fileName), Encoding.UTF8))
-                    {
-                        while (!sr2.EndOfStream)
-                        {
-                            oldTextList.Add(sr2.ReadLine());
-                        }
-                        //oldTextList = oldTextList.OrderBy(o => o.ToString()).ToList();
-                    }
-                }
-                #endregion
+                //List<string> oldTextList = new List<string>();
+                var oldTextList = new Dictionary<string, string>();//汉化字典
+                加载汉化文(fileName, oldTextList);
                 using (StreamReader sr = new StreamReader(propertiePath, Encoding.ASCII))//原文文件
                 {
                     int line = 0;
@@ -487,24 +390,18 @@ namespace MyTextAnalyzer
                             continue;
                         }
                         //Result.AppendText(string.Format("{2}行为：{1}{0}", Environment.NewLine, a, line++));
-                        string newhead = a.Split('=').First();//原文头部
-                        string fine = oldTextList.Where(o => o.StartsWith(newhead)).FirstOrDefault();//汉化文  
+                        string newhead = a.Split('=').First().Trim();//原文头部
                         string TextValue = (a.Split('=').Last() ?? "");
-                        string TextValueCN = fine.Split('=').Last() ?? "";
-
+                        string TextValueCN = string.Empty;
+                        if (oldTextList.ContainsKey(newhead))
+                            TextValueCN = oldTextList[newhead].Trim();
                         Encoding origin = Encoding.UTF8;
                         Encoding targetEnco = Encoding.GetEncoding(936);
                         byte[] ansiBytes = origin.GetBytes(TextValueCN);
                         byte[] utf8Bytes = Encoding.Convert(origin, targetEnco, ansiBytes);
                         string cn = targetEnco.GetString(utf8Bytes);
-                        cn = "";
-                        //TODO:UTF→GBK
-
-                        //string temp = "[{\"Data\":\"" + TextValueCN + "\"}]";
-                        ////string cn = (JsonConvert.DeserializeObject<A>(temp)).Data;
-                        //var caonima = JsonConvert.SerializeObject(new A { Data = TextValueCN });
-                        ////string cn = (JsonConvert.DeserializeObject<List<A>>(caonima)).First().Data;
-                        //string cn = (JsonConvert.DeserializeObject<A>(caonima,)).Data;         
+                        //string cn = TextValueCN;
+                        //TODO:UTF→GBK   
                         try
                         {
                             using (SqlConnection connection = new SqlConnection(con))
@@ -515,9 +412,9 @@ namespace MyTextAnalyzer
                                     {
                                         TextLine = line,
                                         TextKey = newhead,
-                                        TextValue = TextValue,
-                                        TextValueCN = TextValueCN,
+                                        TextValue = TextValue,                                        
                                         fileName = fileName,
+                                        TextValueCN = TextValueCN,
                                         TextValueCN1 = cn,
                                     });
                             }
