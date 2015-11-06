@@ -3,7 +3,7 @@
 原理很简单，lib目录下的resources_en.jar这个包就是编辑器相关的，解压好就是那几个文件夹，其中messages文件夹就是语言相关的。由于编码问题，不能直接打开，要用别的工具编辑。
 ##android studio 版本
 
-window版 1.1.0 
+window版 1.2.0 
 
 ##todo
 ### 汉化
@@ -51,3 +51,5 @@ copy "路径\resources_en.jar"  "路径\Android Studio\lib"
 
 ## 如何参与汉化？
 用eclipse+properties-editor插件或myeclipse打开\MyTextAnalyzer\Result文件，编辑后pull request过来就行，由于编码问题，最好附上中文，我会检查，然后合并。最好有上下文环境（截图，这样尽可能的避免误翻）
+
+上面都是我开玩笑的,实际情况是,老子已经不玩啦,哈哈哈哈哈哈哈哈哈阿哈哈哈.
